@@ -6,12 +6,14 @@ workflows:
       vars:
         GRADLE_TASK: "assembleRelease"
     scripts:
-      - name: Build APK
+      - name: Change to project root and build
         script: |
-          ./gradlew $GRADLE_TASK
+          cd android  # <-- if your gradlew is inside android/
+          chmod +x ../gradlew
+          ../gradlew $GRADLE_TASK
     artifacts:
-      - app/build/outputs//*.apk
+      - android/app/build/outputs//*.apk
     publishing:
       email:
         recipients:
-          - syedrizwan003@gmail.com  # Replace with your email
+          - syedrizwan003@gmail.com 
